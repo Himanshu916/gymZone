@@ -1,0 +1,39 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.box {
+  background-color: red;
+}
+
+.navigation--list {
+  color: white;
+  cursor: pointer;
+}
+
+.shoppingBag {
+  width: 200px;
+}
+
+.shoppingBag img {
+  width: 100%;
+}
+
+.shoppingBag--information {
+  display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+  width: calc(100% - 200px);
+}
+.quantity-btn {
+  width: 2rem;
+  margin-right: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.2rem 0.5rem 0;
+  background-color: var(--secondary-color);
+  border: 0px;
+  border-radius: 2px;
+  cursor: pointer;
+}
