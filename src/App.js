@@ -1,7 +1,7 @@
 import "./styles.css";
 import "./mandik.css";
-import { useContext } from "react";
-import { categoryContext } from "./contexts/category-context";
+import {Routes,Route} from "react-router-dom";
+
 import Header from "./components/header";
 import Sports from "./components/sports";
 import Shoes from "./components/shoes";
@@ -10,19 +10,30 @@ import Supplements from "./components/supplements";
 import FoodAndDrinks from "./components/foodanddrink";
 import Cart from "./components/cart";
 import WishList from "./components/wishlist";
+import Home from "./components/Home";
+import Product from "./components/Product"
+
+
+
 
 export default function App() {
-  const { router } = useContext(categoryContext);
+
   return (
     <div>
+  
       <Header />
-      {router === "sports" && <Sports />}
-      {router === "shoes" && <Shoes />}
-      {router === "gym" && <GymEssentials />}
-      {router === "supplements" && <Supplements />}
-      {router === "foodanddrink" && <FoodAndDrinks />}
-      {router === "cart" && <Cart />}
-      {router === "wishlist" && <WishList />}
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/sports" element={<Sports />} />
+        <Route path="/shoes" element={<Shoes />} />
+        <Route path="/gym" element={ <GymEssentials />} />
+        <Route path="/supplements" element={<Supplements />} />
+        <Route path="/foodanddrink" element={<FoodAndDrinks />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="/products/:id" element={<Product/>} />
+      </Routes>
+
     </div>
   );
 }

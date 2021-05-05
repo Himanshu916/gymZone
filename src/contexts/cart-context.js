@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-
+import axios from "axios"
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -7,7 +7,7 @@ export const CartProvider = ({ children }) => {
     itemsInCart: [],
     itemsInWishList: []
   });
-
+ 
   return (
     <>
       <CartContext.Provider
@@ -22,11 +22,22 @@ export const CartProvider = ({ children }) => {
     </>
   );
 };
-function cartReducer(state, action) {
+ function cartReducer(state, action) {
   switch (action.type) {
     case "RemoveFromCart":
       console.log(action.payload);
-
+      ( async ()=>
+      {
+        try{
+          await axios.delete("http://localhost:5000/api/cart",{data:action.payload})
+         
+        }
+        catch(err)
+        {
+          console.log(err) 
+         
+        }
+      })()
       return {
         ...state,
         itemsInCart: state.itemsInCart.filter(
@@ -34,18 +45,66 @@ function cartReducer(state, action) {
         )
       };
     case "AddToCart":
+      ( async ()=>
+      {
+        try{
+          await axios.post("http://localhost:5000/api/cart",{...action.payload,quantity:1})
+         
+        }
+        catch(err)
+        {
+          console.log(err)
+          
+        }
+
+      
+      })()
       return {
         ...state,
         itemsInCart: [...state.itemsInCart, { ...action.payload, quantity: 1 }]
       };
 
     case "AddToWishList":
+     ( async ()=>
+      {
+        try{
+          await axios.post("http://localhost:5000/api/wishlist",action.payload)
+         
+        }
+        catch(err)
+        {
+          console.log(err)
+          
+        }
+
+      
+      })()
+ 
       return {
         ...state,
         itemsInWishList: [...state.itemsInWishList, action.payload]
       };
+   
+    case  "setWishList" :
+      return {...state,itemsInWishList:action.payload};
+
+    case  "setCart" :
+        return {...state,itemsInCart:action.payload}
 
     case "RemoveFromWishList":
+    
+      ( async ()=>
+      {
+        try{
+          await axios.delete("http://localhost:5000/api/wishlist",{data:action.payload})
+         
+        }
+        catch(err)
+        {
+          console.log(err) 
+         
+        }
+      })()
       return {
         ...state,
         itemsInWishList: state.itemsInWishList.filter(
@@ -58,7 +117,7 @@ function cartReducer(state, action) {
         ...state.itemsInCart,
         itemsInCart: [
           ...state.itemsInCart.map((item) => {
-            if (item.id === action.payload.id)
+            if (item.unique === action.payload.unique)
               return { ...item, quantity: item.quantity + 1 };
             return item;
           })
@@ -71,7 +130,7 @@ function cartReducer(state, action) {
         ...state.itemsInCart,
         itemsInCart: [
           ...state.itemsInCart.map((item) => {
-            if (item.id === action.payload.id)
+            if (item.unique === action.payload.unique)
               return { ...item, quantity: item.quantity - 1 };
             return item;
           })

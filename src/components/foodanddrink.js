@@ -4,26 +4,43 @@ import { CartContext } from "../contexts/cart-context";
 import PriceFilter from "../components/pricefilter";
 import { getSortedData } from "../someextrafunctionality.js/sorted";
 import { FilterContext } from "../contexts/filter-context";
-
+import {Link} from "react-router-dom";
+import {getSearchedProducts} from "../someextrafunctionality.js/searchedProducts";
+import SearchedText from "../components/SearchedText"
+import "../filterDesign.css"
 export default function FoodAndDrinks() {
   const [FoodAndDrinks, setFoodAndDrinks] = useState([]);
   const { dispatch, itemsInCart, itemsInWishList } = useContext(CartContext);
   const { sortBy } = useContext(FilterContext);
-  useEffect(() => {
-    (async function () {
-      const { data } = await axios.get("/api/foodanddrinks");
-      console.log(data);
-      setFoodAndDrinks([...FoodAndDrinks, ...data.foodanddrinks]);
-    })();
-  }, []);
+  const {saveSearch,dispatche} = useContext(FilterContext);
+ 
+
+  useEffect(async ()=>{
+    try{
+      const {data}= await axios.get("http://localhost:5000/api/foodanddrinks");
+      setFoodAndDrinks([...FoodAndDrinks, ...data]);
+      console.log("from my backend",data,data[0]._id)
+    }
+  catch(error){
+    console.log(error)
+  }
+  },[])
+
+  useEffect(()=>
+{
+  return ()=>dispatche({type:"saveSearchText",payload:""})
+},[])
+
   const sortedData = getSortedData(FoodAndDrinks, sortBy);
+  const searchedProducts = getSearchedProducts(sortedData,saveSearch);
   return (
     <div>
-      <h1>SportsWear</h1>
+      <SearchedText text={saveSearch}/>
+      <div className="filterDesign">
       <PriceFilter />
 
-      <div className="cards">
-        {sortedData.map((foodanddrink) => {
+      <div className="cards filterDesign__right">
+        {searchedProducts.map((foodanddrink) => {
           const price =
             foodanddrink.markedprice -
             (foodanddrink.discount / 100) * foodanddrink.markedprice;
@@ -39,7 +56,9 @@ export default function FoodAndDrinks() {
 
           return (
             <div className="card">
+            <Link to={`/products/${foodanddrink._id}`}>
               <img className="card__img" src={foodanddrink.imgsrc} alt="" />
+              </Link>
               <div className="card__information">
                 <h3 className="card__brand">Brand x</h3>
                 <h4 className="card__description">{foodanddrink.text}</h4>
@@ -113,6 +132,7 @@ export default function FoodAndDrinks() {
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );

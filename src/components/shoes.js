@@ -1,29 +1,46 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../contexts/cart-context";
 import axios from "axios";
+import {Link} from "react-router-dom";
 import PriceFilter from "./pricefilter";
 import { getSortedData } from "../someextrafunctionality.js/sorted";
 import { FilterContext } from "../contexts/filter-context";
-
+import {getSearchedProducts} from "../someextrafunctionality.js/searchedProducts";
+import SearchedText from "../components/SearchedText"
+import "../filterDesign.css"
 export default function Shoes() {
   const [shoes, setShoes] = useState([]);
   const { dispatch, itemsInCart, itemsInWishList } = useContext(CartContext);
   const { sortBy } = useContext(FilterContext);
-  useEffect(() => {
-    (async function () {
-      const { data } = await axios.get("./api/shoes");
+ const {saveSearch,dispatche} = useContext(FilterContext);
 
-      setShoes([...shoes, ...data.shoes]);
-    })();
-  }, []);
+
+  useEffect(async ()=>{
+    try{
+      const {data}= await axios.get("http://localhost:5000/api/shoesitems");
+      setShoes([...shoes, ...data]);
+  
+    }
+  catch(error){
+    console.log(error)
+  }
+  },[])
+  useEffect(()=>
+{
+  return ()=>dispatche({type:"saveSearchText",payload:""})
+},[])
   const sortedData = getSortedData(shoes, sortBy);
+  const searchedProducts = getSearchedProducts(sortedData,saveSearch);
+
   return (
     <div>
-      <h1>SportsWear</h1>
+      
+      <SearchedText text={saveSearch}/>
+      <div className="filterDesign">
       <PriceFilter />
 
-      <div className="cards">
-        {sortedData.map((cloth) => {
+      <div className="cards filterDesign__right">
+        {searchedProducts.map((cloth) => {
           const price =
             cloth.markedprice - (cloth.discount / 100) * cloth.markedprice;
 
@@ -35,8 +52,10 @@ export default function Shoes() {
           );
 
           return (
-            <div className="card">
+            <div className="card" key={cloth._id}>
+            <Link to={`/products/${cloth._id}`}>
               <img className="card__img" src={cloth.imgsrc} alt="" />
+              </Link>
               <div className="card__information">
                 <h3 className="card__brand">Brand x</h3>
                 <h4 className="card__description">{cloth.text}</h4>
@@ -50,7 +69,7 @@ export default function Shoes() {
                   </span>
                 </div>
               </div>
-              <div class="after">
+              <div className="after">
                 <div>
                   <button
                     className={
@@ -110,6 +129,7 @@ export default function Shoes() {
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );

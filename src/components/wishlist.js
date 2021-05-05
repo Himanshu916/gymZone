@@ -1,9 +1,21 @@
-import { useContext } from "react";
+import axios from "axios";
+import { useContext,useEffect,useState } from "react";
 import { CartContext } from "../contexts/cart-context";
+import {Link} from "react-router-dom";
 
 export default function WishList() {
   const { itemsInWishList, dispatch, itemsInCart } = useContext(CartContext);
+  
 
+useEffect(async()=>
+{
+
+  const {data}= await axios.get("http://localhost:5000/api/wishlist");
+  dispatch({type:"setWishList",payload:data})
+  // console.log(data)
+  
+
+},[])
   return (
     <>
       {(() => {
@@ -18,8 +30,10 @@ export default function WishList() {
                   item.id === itemInCart.id && item.text === itemInCart.text
               );
               return (
-                <div className="card">
+                <div className="card"  key={item._id}>
+                <Link to={`/products/${item._id}`}>
                   <img className="card__img" src={item.imgsrc} alt="" />
+                  </Link>
                   <div className="card__information">
                     <h3 className="card__brand">Brand x</h3>
                     <h4 className="card__description">{item.text}</h4>

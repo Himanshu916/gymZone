@@ -1,29 +1,46 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/cart-context";
+import {Link} from "react-router-dom";
 import PriceFilter from "../components/pricefilter";
 import { getSortedData } from "../someextrafunctionality.js/sorted";
 import { FilterContext } from "../contexts/filter-context";
-
+import {getSearchedProducts} from "../someextrafunctionality.js/searchedProducts";
+import SearchedText from "../components/SearchedText"
+import "../filterDesign.css"
 export default function GymEssentials() {
   const [gymEssentials, setgymEssentials] = useState([]);
   const { dispatch, itemsInCart, itemsInWishList } = useContext(CartContext);
   const { sortBy } = useContext(FilterContext);
-  useEffect(() => {
-    (async function () {
-      const { data } = await axios.get("./api/gymessentials");
+  const {saveSearch,dispatche} = useContext(FilterContext);
 
-      setgymEssentials([...gymEssentials, ...data.gymessentials]);
-    })();
-  }, []);
+  useEffect(async ()=>{
+    try{
+      const {data}= await axios.get("http://localhost:5000/api/gymessentials");
+      setgymEssentials([...gymEssentials, ...data]);
+      console.log("from my backend",data,data[0]._id)
+    }
+  catch(error){
+    console.log(error)
+  }
+  },[])
+
+  useEffect(()=>
+{
+  return ()=>dispatche({type:"saveSearchText",payload:""})
+},[])
+
+
   const sortedData = getSortedData(gymEssentials, sortBy);
+  const searchedProducts = getSearchedProducts(sortedData,saveSearch);
   return (
     <div>
-      <h1>GymEssentials</h1>
+      <SearchedText text={saveSearch}/>
+      <div className="filterDesign">
       <PriceFilter />
 
-      <div className="cards">
-        {sortedData.map((gymessential) => {
+      <div className="cards filterDesign__right">
+        {searchedProducts.map((gymessential) => {
           const price =
             gymessential.markedprice -
             (gymessential.discount / 100) * gymessential.markedprice;
@@ -39,7 +56,9 @@ export default function GymEssentials() {
 
           return (
             <div className="card">
+            <Link to={`/products/${gymessential._id}`}>
               <img className="card__img" src={gymessential.imgsrc} alt="" />
+              </Link>
               <div className="card__information">
                 <h3 className="card__brand">Brand x</h3>
                 <h4 className="card__description">{gymessential.text}</h4>
@@ -113,6 +132,7 @@ export default function GymEssentials() {
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );
