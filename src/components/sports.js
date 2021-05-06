@@ -18,7 +18,7 @@ export default function Sports() {
 
 useEffect(async ()=>{
   try{
-    const {data}= await axios.get("http://localhost:5000/api/sportsitems");
+    const {data}= await axios.get("https://infinite-tundra-39375.herokuapp.com/api/sportsitems");
     setClothes([...clothes, ...data]);
 
   }

@@ -12,7 +12,7 @@ export default function Product()
     let x;
     useEffect(async()=>
     {
-        const {data} = await axios.get("http://localhost:5000/api/products/"+id);
+        const {data} = await axios.get("https://infinite-tundra-39375.herokuapp.com/api/products/"+id);
 
             setProduct(data);
           

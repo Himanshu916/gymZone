@@ -17,7 +17,7 @@ export default function Shoes() {
 
   useEffect(async ()=>{
     try{
-      const {data}= await axios.get("http://localhost:5000/api/shoesitems");
+      const {data}= await axios.get("https://infinite-tundra-39375.herokuapp.com/api/shoesitems");
       setShoes([...shoes, ...data]);
   
     }

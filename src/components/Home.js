@@ -1,5 +1,4 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
-import {useEffect} from "react"
 import { Carousel } from 'react-responsive-carousel'
 const sportswear  = require('../images/sportswear.jpg');
 const gymessentialpath = require("../images/img1.jpg")
@@ -19,7 +18,7 @@ export default function Home()
             <p className="legend">SportsWears</p>
             <div className="content">
                 <h3>Latest Sports Wear</h3>
-                <p> himanshuhuf3ernme</p>
+                <p> The clothing you choose influences your performance on the sports field and in the gym </p>
                 <Link to="/sports">
                 <button>Discover</button>
                 </Link>
@@ -31,8 +30,10 @@ export default function Home()
             <img src={gymessentialpath.default} alt=""/>
             <p className="legend">GymEssentials</p>
             <div className="content">
-                <h3 style={{color:"#666"}}>Latest Sports Wear</h3>
-                <p style={{color:"#666"}}>jfhehrhewjhr23juiui23jdnjhru32j </p>
+                <h3>Latest Sports Wear</h3>
+                <p style={{color:"#D1D5DB"}} >“ <span style={{color:"black"}}> There are no <span style={{color:"#D1D5DB"}}>shortcuts </span>   </span>—everything is reps, reps, reps.” – Arnold Schwarzenegger 
+                 </p>
+                 <p style={{color:"black"}}>What are you waiting for go and checkout your gym essentials.</p>
                 <Link to="/gym">
                 <button>Discover</button>
                 </Link>
@@ -43,7 +44,7 @@ export default function Home()
             <p className="legend">Shoes</p>
             <div className="content">
                 <h3>Trending Shoes</h3>
-                <p>himanshuhuf3ernme</p>
+                <p>When life throws you lemons, grab your running shoes.</p>
                 <Link to="/shoes">
                 <button>Discover</button>
                 </Link>
@@ -54,7 +55,7 @@ export default function Home()
             <p className="legend">Supplements</p>
             <div className="content">
                 <h3>Get Fuel</h3>
-                <p> himanshuhuf3ernme</p>
+                <p> The best feeling in the world is a hard workout a shower and a protein shake.</p>
                 <Link to="/supplements">
                 <button>Discover</button>
                 </Link>
@@ -65,7 +66,9 @@ export default function Home()
             <p className="legend">Food And Drink</p>
             <div className="content">
                 <h3>Eat Healthy</h3>
-                <p> himanshuhuf3ernme</p>
+                <p> “Let go of toxic control, in order to regain healthy control.”
+― Kayla Rose Kotecki</p>
+<p>Lets Eat Clean</p>
                 <Link to="/foodanddrink">
                 <button>Discover</button>
                 </Link>

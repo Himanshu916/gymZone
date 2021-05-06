@@ -30,7 +30,7 @@ export default function Cart() {
   },[itemsInCart])
   useEffect(async ()=>
   {
-    const {data}= await axios.get("http://localhost:5000/api/cart");
+    const {data}= await axios.get("https://infinite-tundra-39375.herokuapp.com/api/cart");
     console.log(data)
     dispatch({type:"setCart",payload:data})
   },[])

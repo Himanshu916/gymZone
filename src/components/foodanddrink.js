@@ -17,7 +17,7 @@ export default function FoodAndDrinks() {
 
   useEffect(async ()=>{
     try{
-      const {data}= await axios.get("http://localhost:5000/api/foodanddrinks");
+      const {data}= await axios.get("https://infinite-tundra-39375.herokuapp.com/api/foodanddrinks");
       setFoodAndDrinks([...FoodAndDrinks, ...data]);
       console.log("from my backend",data,data[0]._id)
     }

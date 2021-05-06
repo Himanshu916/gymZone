@@ -17,7 +17,7 @@ export default function Supplements() {
 
   useEffect(async ()=>{
     try{
-      const {data}= await axios.get("http://localhost:5000/api/supplements");
+      const {data}= await axios.get("https://infinite-tundra-39375.herokuapp.com/api/supplements");
       setSupplements([...supplements, ...data]);
       console.log("from my backend",data,data[0]._id)
     }

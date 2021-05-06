@@ -16,7 +16,7 @@ export default function GymEssentials() {
 
   useEffect(async ()=>{
     try{
-      const {data}= await axios.get("http://localhost:5000/api/gymessentials");
+      const {data}= await axios.get("https://infinite-tundra-39375.herokuapp.com/api/gymessentials");
       setgymEssentials([...gymEssentials, ...data]);
       console.log("from my backend",data,data[0]._id)
     }
