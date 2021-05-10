@@ -1,0 +1,29 @@
+.filterDesign
+{
+    display:flex;
+}
+
+
+.filterDesign__left
+{
+    flex:0.2;
+}
+
+.filterDesign__right
+{
+    flex:0.8;
+}
+
+@media screen and (max-width:550px) {
+    
+
+    .filterDesign__left
+    {
+        flex:0.4;
+    }
+    .filterDesign__right
+{
+    flex:0.6;
+}
+
+}
