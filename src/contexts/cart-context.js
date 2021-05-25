@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
       ( async ()=>
       {
         try{
-          await axios.delete("http://localhost:5000/api/cart",{data:action.payload})
+          await axios.delete("https://infinite-tundra-39375.herokuapp.com/api/cart",{data:action.payload})
          
         }
         catch(err)
@@ -48,7 +48,7 @@ export const CartProvider = ({ children }) => {
       ( async ()=>
       {
         try{
-          await axios.post("http://localhost:5000/api/cart",{...action.payload,quantity:1})
+          await axios.post("https://infinite-tundra-39375.herokuapp.com/api/cart",{...action.payload,quantity:1})
          
         }
         catch(err)
@@ -68,7 +68,7 @@ export const CartProvider = ({ children }) => {
      ( async ()=>
       {
         try{
-          await axios.post("http://localhost:5000/api/wishlist",action.payload)
+          await axios.post("https://infinite-tundra-39375.herokuapp.com/api/wishlist",action.payload)
          
         }
         catch(err)
@@ -96,7 +96,7 @@ export const CartProvider = ({ children }) => {
       ( async ()=>
       {
         try{
-          await axios.delete("http://localhost:5000/api/wishlist",{data:action.payload})
+          await axios.delete("https://infinite-tundra-39375.herokuapp.com/api/wishlist",{data:action.payload})
          
         }
         catch(err)
