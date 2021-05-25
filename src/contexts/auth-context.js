@@ -1,9 +1,15 @@
-import {createContext,useContext,useState,useContext} from "react";
+import {createContext,useContext,useState,useEffect} from "react";
 import {fakeauthapi} from "../fakeAuthApi"
 export const AuthContext = createContext();
 
-const [isUserLoggedIn,setUserLoggedIn] = useState(false);
 
+
+
+
+
+export  function AuthProvider({children})
+{
+const [isUserLoggedIn,setUserLoggedIn] = useState(false);
 useEffect(() => {
     const  loginStatus = JSON.parse(localStorage?.getItem("login"));
 
@@ -23,11 +29,9 @@ async function loginWithCredentials(userName,password)
     {
         console.log("password is wrong");
     }
+    // return
 }
 
-
-export default function AuthProvider({children})
-{
     return (
         <AuthContext.Provider value={{isUserLoggedIn,loginWithCredentials}}>
             {children}

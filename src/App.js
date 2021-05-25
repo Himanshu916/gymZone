@@ -11,7 +11,10 @@ import FoodAndDrinks from "./components/foodanddrink";
 import Cart from "./components/cart";
 import WishList from "./components/wishlist";
 import Home from "./components/Home";
-import Product from "./components/Product"
+import Product from "./components/Product";
+import PrivateRoute from "./PrivateRoute";
+import Login from "./components/Login"
+import SignUp from "./components/SignUp"
 
 
 
@@ -24,14 +27,16 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
         <Route path="/sports" element={<Sports />} />
         <Route path="/shoes" element={<Shoes />} />
         <Route path="/gym" element={ <GymEssentials />} />
         <Route path="/supplements" element={<Supplements />} />
         <Route path="/foodanddrink" element={<FoodAndDrinks />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<WishList />} />
         <Route path="/products/:id" element={<Product/>} />
+        <PrivateRoute path="/wishlist" element={<WishList />} />
       </Routes>
 
     </div>

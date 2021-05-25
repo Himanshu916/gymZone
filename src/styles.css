@@ -320,6 +320,60 @@
   padding:20px;
 }
 
+.loginPage
+{
+  display: flex;
+  height:80vh;
+  justify-content: center;
+  box-sizing: border-box;
+ /* align-items: center; */
+}
+.loginForm
+{
+  display: flex;
+  padding:5rem;
+  width:30%;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color:white ;
+  color:#555;
+  /* align-items: center; */
+}
+.loginMessage
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loginMessage p
+{
+  font-weight: 600;
+  padding:.5rem 0;
+}
+.loginSubmit
+{
+  padding:1rem;
+  border:none;
+  color:white;
+  font-size: 1.2rem;;
+  background-color: #555;
+}
+.loginPrivacyMessage
+{
+  font-size: .8rem;
+}
+.loginPrivacyMessage span
+{
+  color:blue;
+  font-weight: 500;
+  
+}
+.signUpMessage
+{
+  align-self: center;
+  color:blue;
+}
 @media only screen and (max-width: 600px) {
  .product{
    flex-direction: column;
@@ -329,4 +383,20 @@
    width:80%;
    margin:30px auto;
  }
+
+
+}
+@media only screen and (max-width: 800px)
+{
+  .loginPage
+  {
+    height:70vh;
+ 
+  }
+  .loginForm
+  {
+    width:100%;
+    padding:3rem 3rem ;
+  }
+
 }

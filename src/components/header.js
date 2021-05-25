@@ -9,10 +9,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Navigation from "../components/navigation.js";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {useAuth} from "../contexts/auth-context"
 
 
 export default function Header() {
 const {searchText,dispatche,saveSearch} = useContext(FilterContext);
+const {isUserLoggedIn} = useAuth()
 
   return (
     <>
@@ -38,7 +40,13 @@ const {searchText,dispatche,saveSearch} = useContext(FilterContext);
                 </div>
             </form>
             <div className="user-wishlist-cart">
-                <AccountCircleIcon />
+                      <div>
+                      <span>
+                        {isUserLoggedIn? <button>LOGOUT</button> : <Link to="/login"> <button>Login</button></Link> }
+                      </span>
+                      <AccountCircleIcon />
+                      </div>
+                
                 <Link style={{textDecoration:"none",color:"black"}} to="wishlist">
                   <FavoriteBorderIcon />
                 </Link>

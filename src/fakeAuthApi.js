@@ -21,14 +21,18 @@ const findByUserName=(userName)=>
 }
 
 
-const fakeauthapi = (userName,password)=>
+export const fakeauthapi = (userName,password)=>
 {
+    console.log(userName,"himanh")
+    const user = findByUserName(userName);
+    console.log(user)
     return new Promise((resolve,reject)=>
     {
         setTimeout(()=>
         {
             const user = findByUserName(userName);
-            if(user.password === password)
+            console.log(user)
+            if(user?.password === password)
             {
                 resolve({success:true,status:200})
             }
