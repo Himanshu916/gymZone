@@ -1,13 +1,16 @@
 import React,{useContext} from 'react'
 import {Link} from "react-router-dom"
 import {CartContext} from "../../contexts/cart-context";
+import {useAuth} from "../../contexts/auth-context"
+import {useNavigate} from "react-router-dom"
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 
 export default function ProductItem({product}) {
 const {itemsInCart,itemsInWishList,dispatch} = useContext(CartContext)
-
+const {token} = useAuth();
+const navigate = useNavigate();
 const index = itemsInCart?.findIndex(
   (item) =>
     item._id === product._id 
@@ -58,7 +61,15 @@ const indexwl = itemsInWishList?.findIndex(
             </div>
             <div className="wishlist-button">
            {
-            indexwl === -1 ? <FavoriteBorderIcon onClick={()=>dispatch({type:"AddToWishList",payload:product})} className="add"/> : <FavoriteIcon onClick={()=>dispatch({type:"RemoveFromWishList",payload:product})} className="remove"   />
+            indexwl === -1 || indexwl === undefined ? <FavoriteBorderIcon onClick={()=>{
+               if(!token)
+              return navigate("/login")
+              else
+              return dispatch({type:"AddToWishList",payload:product})}} className="add"/> : <FavoriteIcon onClick={()=>{
+              if(!token)
+              return navigate("/login")
+              else
+              return dispatch({type:"RemoveFromWishList",payload:product})}} className="remove"   />
            }
             </div>
   
