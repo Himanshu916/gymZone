@@ -90,6 +90,7 @@ if(!token)
                         <div>
                           <h3>{item.title}</h3>
                           <h4>Sold : {item.sold}</h4>
+                          <h4>Discount : {item.discount}%</h4>
                           <div>
                            
                             <p>Quantity : {item.quantity}</p>
