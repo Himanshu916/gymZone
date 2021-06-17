@@ -19,7 +19,7 @@ export default function Home()
             <div className="content">
                 <h3>Latest Sports Wear</h3>
                 <p> The clothing you choose influences your performance on the sports field and in the gym </p>
-                <Link to="/sports">
+                <Link to="/products">
                 <button>Discover</button>
                 </Link>
                
@@ -34,7 +34,7 @@ export default function Home()
                 <p style={{color:"#D1D5DB"}} >“ <span style={{color:"black"}}> There are no <span style={{color:"#D1D5DB"}}>shortcuts </span>   </span>—everything is reps, reps, reps.” – Arnold Schwarzenegger 
                  </p>
                  <p style={{color:"black"}}>What are you waiting for go and checkout your gym essentials.</p>
-                <Link to="/gym">
+                <Link to="/products">
                 <button>Discover</button>
                 </Link>
             </div>
@@ -45,7 +45,7 @@ export default function Home()
             <div className="content">
                 <h3>Trending Shoes</h3>
                 <p>When life throws you lemons, grab your running shoes.</p>
-                <Link to="/shoes">
+                <Link to="/products">
                 <button>Discover</button>
                 </Link>
             </div>
@@ -56,7 +56,7 @@ export default function Home()
             <div className="content">
                 <h3>Get Fuel</h3>
                 <p> The best feeling in the world is a hard workout a shower and a protein shake.</p>
-                <Link to="/supplements">
+                <Link to="/products">
                 <button>Discover</button>
                 </Link>
             </div>
@@ -69,7 +69,7 @@ export default function Home()
                 <p> “Let go of toxic control, in order to regain healthy control.”
 ― Kayla Rose Kotecki</p>
 <p>Lets Eat Clean</p>
-                <Link to="/foodanddrink">
+                <Link to="/products">
                 <button>Discover</button>
                 </Link>
             </div>

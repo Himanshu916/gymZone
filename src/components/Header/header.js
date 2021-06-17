@@ -1,8 +1,10 @@
 import {Link} from "react-router-dom";
+import {useContext} from "react"
+import {CartContext} from "../../contexts/cart-context"
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartTwoToneIcon from '@material-ui/icons/ShoppingCartTwoTone';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import Navigation from "../navigation";
+
 
 import {useAuth} from "../../contexts/auth-context"
 
@@ -10,7 +12,7 @@ import {useAuth} from "../../contexts/auth-context"
 export default function Header() {
 
 const {isUserLoggedIn,logout,admin} = useAuth()
-
+const { itemsInCart,itemsInWishList } = useContext(CartContext);
 function adminRouter() {
   return (
     <>
@@ -40,7 +42,10 @@ return (
     </div>
     <div>
       <h2 className="logo">
-       { admin ? "Admin":"Gym Zone"}
+      <Link className="header__link" to="/">
+      { admin ? "Admin":"Gym Zone"}
+      </Link>
+     
       </h2>
     </div>
   </div>
@@ -67,13 +72,14 @@ return (
         </li>
     </ul>
     <ul className="right__rightchild">
-        <li >
+        <li className="wishList" >
+        <span className="wishList_quantity">{itemsInWishList?.length}</span>
           <Link className="header__link" to="wishlist">
             <FavoriteBorderIcon />
           </Link>
         </li>
         <li className="cart">
-          <span className="cart_quantity">0</span>
+          <span className="cart_quantity">{itemsInCart?.length}</span>
           <Link className="header__link" to="cart">
             <ShoppingCartTwoToneIcon/>
           </Link>
@@ -85,31 +91,9 @@ return (
 
 </header>
    
-<Navigation/>
+
 </div>
   
   
   );
 }
-
-
-
-
-
-
-
-
-// <form className="search-bar" action="">
-// <div className="search-box">
-//     <ArrowBackIcon onClick={(e)=>{
-//       e.preventDefault();
-//       dispatche({type:"saveSearchText",payload:""})}} style={{display:saveSearch===""?"none":""}} />
-//     {/* <button   >clear</button> */}
-//     <input value={searchText} onChange={(e)=>dispatche({type:"search",payload:e.target.value})} className="search-bar__input"
-//         placeholder="search for products"
-//         type="text" id="searchitems"
-//       />
-//       <label className="search-bar__label" htmlFor="searchitems"> <SearchIcon onClick={()=>dispatche({type:"saveSearchText",payload:searchText})} />
-//       </label>
-// </div>
-// </form>

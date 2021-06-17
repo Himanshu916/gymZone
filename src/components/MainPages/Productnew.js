@@ -1,13 +1,26 @@
 import React,{useEffect,useContext,useState} from 'react'
 import {GlobalState} from "../../contexts/Global-State"
 import {useParams,Link} from "react-router-dom"
-import ProductItem from "../../components/MainPages/ProductItem"
+import ProductItem from "../../components/MainPages/ProductItem";
+import { CartContext } from "../../contexts/cart-context"
 import BtnRender from "../MainPages/utils/CartButton"
 export default function Productnew() {
      const {state} = useContext(GlobalState)
+     const {itemsInCart,itemsInWishList,dispatch} = useContext(CartContext)
      const [product,setProduct] = useState([])
-    const [products] = state.products.products
-    const {id} = useParams();
+     const [products] = state.products.products
+     const {id} = useParams();
+
+const index = itemsInCart?.findIndex(
+  (item) =>
+    item._id === id
+);
+const indexwl = itemsInWishList?.findIndex(
+  (item) =>
+    item._id === id
+);
+
+    
 
     useEffect(() => {
         products.forEach(product=>{
@@ -37,16 +50,26 @@ export default function Productnew() {
                         <p> {product.content} </p>
                         <p> Sold :  {product.sold}</p>
                         <div className="productnew_detail_button">
-                        <Link to="">
-                            <button className="cart">
+                    
+                            <button
+                                 disabled={index === -1 ? false : true}
+                                onClick={() => {
+                                dispatch({
+                                    type: "AddToCart",
+                                    payload: product
+                                });
+                                }}
+                              className="cart">
                                 Add To Cart
                             </button>
-                        </Link>
-                        <Link to="">
-                            <button className="wishlist">
+                      
+                       
+                            <button disabled = {indexwl===-1 ? false : true}
+                            onClick={()=>dispatch({type:"AddToWishList",payload:product})}
+                             className="wishlist">
                                 Move To WishList
                             </button>
-                        </Link>
+                     
                         </div>
                       
 

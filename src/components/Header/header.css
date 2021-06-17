@@ -37,9 +37,21 @@
     padding:0 ;
    
 }
-.cart
+.cart,.wishList
 {
     position: relative;
+}
+.wishList_quantity
+{
+    background-color: red;
+    border-radius: 50%;
+    padding:.01rem .3rem;
+    padding-top: .1rem;
+    color:white;
+    position: absolute;
+    right:8px;
+    top:2px;
+    font-size: .8rem;;
 }
 .cart_quantity
 {

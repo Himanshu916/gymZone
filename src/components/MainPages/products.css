@@ -149,7 +149,7 @@
 display:flex;
 flex-wrap: wrap;
 margin:10px 20px;
-justify-content: space-between;
+justify-content: flex-start;
 
 }
 .related_products_heading
