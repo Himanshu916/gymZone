@@ -1,15 +1,30 @@
 import { useContext,useState,useEffect } from "react";
 import { CartContext } from "../contexts/cart-context";
+import {useAuth} from "../contexts/auth-context"
 import axios from "axios"
+import {useNavigate} from "react-router-dom"
 let discountAmount;
 let totalMarked;
 export default function Cart() {
-  const { dispatch } = useContext(CartContext);
-  const { itemsInCart } = useContext(CartContext);
+  const { itemsInCart,dispatch } = useContext(CartContext);
+  const itemsInCartt = [];
   const [total,setTotal] = useState(0);
+console.log(itemsInCart,"aditi")
+
+  const {token} = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(()=>
+{
  
+if(!token)
+{
+ 
+  return navigate("/login")
+}
+    
 
-
+},[token])
   useEffect(()=>
   {
 
@@ -17,7 +32,7 @@ export default function Cart() {
     discountAmount =0;
     totalMarked=0;
    
-    itemsInCart.forEach(item=>
+    itemsInCartt.forEach(item=>
       {
         totalMarked += item.markedprice*item.quantity;
         totalAmount +=  (item.markedprice -
@@ -27,13 +42,9 @@ export default function Cart() {
         item.quantity
       })
       setTotal(totalAmount)
-  },[itemsInCart])
-  useEffect(async ()=>
-  {
-    const {data}= await axios.get("https://infinite-tundra-39375.herokuapp.com/api/cart");
-    console.log(data)
-    dispatch({type:"setCart",payload:data})
   },[])
+
+  console.log(itemsInCart,"in cat")
   return (
     <>
       <div className="cartPage">
@@ -48,18 +59,18 @@ export default function Cart() {
                 {itemsInCart.map((item) => {
                   let flag = 0;
                 
-                  const price =
+                  {/* const price =
                     (item.markedprice -
                       (item.discount / 100) * item.markedprice) *
-                    item.quantity;
+                    item.quantity; */}
 
                   if (item.quantity === 0) {
                     flag = 1;
                   }
                   return (
-                    <li>
+                    <li key={item._id}>
                       <div className="shoppingBag">
-                        <img src={item.imgsrc} alt="" />
+                        <img src={item.images.url} alt="" />
                         <button
                           className="primary-btn"
                           onClick={() => {
@@ -75,7 +86,7 @@ export default function Cart() {
                         <div>
                           <h3>Brand X</h3>
                           <div>
-                            <p> {item.text}</p>
+                            {/* <p> {item.text}</p> */}
                             <p>Quantity : {item.quantity}</p>
                             <button
                               className="quantity-btn"
@@ -98,7 +109,8 @@ export default function Cart() {
                           </div>
                         </div>
 
-                        <div> Rs.{price} {item.markedprice}</div>
+                        <div> Rs.{item.price} </div>
+                        {/* <div> Rs.{price} {item.markedprice}</div> */}
                       </div>
                     </li>
                   );
@@ -108,9 +120,9 @@ export default function Cart() {
           );
         })()}
         </div>
-        {
+        {/* {
 
-       itemsInCart.length !== 0 ? 
+       itemsInCartt.length !== 0 ? 
         <div className="cartPage__place">
             <div className="place__detail">
              <h2> PRICE DETAILS</h2>
@@ -148,8 +160,24 @@ export default function Cart() {
           
         </div>
         :""
-        }
+        } */}
       </div>
     </>
   );
 }
+
+
+
+
+// categorie: "Sports Wear"
+// checked: false
+// content: " Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam corrupti, quisquam maxime explicabo vero culpa eius velit maiores, adipisci aspernatur quod rerum repellendus placeat. Ullam veniam commodi nam iste odit? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam corrupti, quisquam maxime explicabo vero culpa eius velit maiores, adipisci aspernatur quod rerum repellendus placeat. Ullam veniam commodi nam iste odit?"
+// description: " Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam corrupti, quisquam maxime explicabo vero culpa eius velit maiores, adipisci aspernatur quod rerum repellendus placeat. Ullam veniam commodi nam iste odit?"
+// images: {public_id: "test/h658zzjoipn2ounogcez", url: "https://res.cloudinary.com/himanshurana/image/upload/v1622568387/test/h658zzjoipn2ounogcez.jpg"}
+// price: 900
+// product_id: "sw02"
+// quantity: 1
+// sold: 0
+// title: "red sports short"
+// __v: 0
+// _id: "60b66e47d9860327fca01bd8"

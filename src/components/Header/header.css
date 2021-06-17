@@ -1,0 +1,65 @@
+.header
+{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 3rem;
+}
+.menu
+{
+    display: none;
+}
+.header__right,.header__left
+{
+    display: flex;
+    align-items: center;
+   
+}
+.header__link
+{
+    text-decoration: none;
+    color:grey;
+    font-size: 1.2rem;
+    margin-right:8px;
+}
+.header__link .MuiSvgIcon-root
+{
+   
+    font-size: 2rem;;
+}
+.right__leftchild,.right__rightchild
+{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    text-decoration: none;
+    margin: 0;
+    padding:0 ;
+   
+}
+.cart
+{
+    position: relative;
+}
+.cart_quantity
+{
+    background-color: red;
+    border-radius: 50%;
+    padding:.01rem .3rem;
+    padding-top: .1rem;
+    color:white;
+    position: absolute;
+    right:8px;
+    top:2px;
+    font-size: .8rem;;
+}
+.right__leftchild li
+{
+    padding:.5rem;
+    
+}
+.right__rightchild li
+{
+    padding:.5rem;
+
+}

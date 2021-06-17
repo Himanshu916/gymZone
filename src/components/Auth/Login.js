@@ -1,43 +1,43 @@
 import React,{useEffect,useState} from 'react';
-import {useAuth} from "../contexts/auth-context";
+import {useAuth} from "../../contexts/auth-context";
 import {useLocation,useNavigate,Link} from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 
 
 const Login = () => {
 
-    const {state} = useLocation();
-    const [user,setUser] = useState({name:"",password:""})
-    const navigate = useNavigate();
-    const {isUserLoggedIn,loginWithCredentials}=useAuth();
-    function clickHandler(e,{name,password})
+    
+    const [user,setUser] = useState({email:"",password:""})
+    // const navigate = useNavigate();
+    const {isUserLoggedIn,loginWithCredentials,logout}=useAuth();
+    function clickHandler(e,{email,password})
     {
         e.preventDefault()
-        console.log(e,user)
+       
     
-      if(!name && !password)
+      if(!email && !password)
       {
           alert("please enter the details")
       }
-      console.log("himanshu rajqs")
-        loginWithCredentials(name,password)
+      
+      isUserLoggedIn ? logout() : loginWithCredentials(email,password);
+
     }
-    function changeEmail(e)
+    function changeHandler(e)
     {
-        setUser({...user,name:e.target.value})
+        const name=e.target.name
+        console.log(name)
+        setUser({...user,[name]:e.target.value})
     }
 
-    function changePassword(e)
-    {
-        setUser({...user,password:e.target.value})
-    }
-    useEffect(()=>
-    {
+   
+    // useEffect(()=>
+    // {
         
-        if(isUserLoggedIn)
-        navigate(state?.from ? state.from : "/")
+    //     if(isUserLoggedIn)
+    //     navigate(state?.from ? state.from : "/")
 
-    },[isUserLoggedIn])
+    // },[isUserLoggedIn])
     return (
       
           <div className="loginPage">
@@ -50,8 +50,8 @@ const Login = () => {
                                 Get access to your Orders, Wishlist and Recommendations
                             </p>
                         </div>
-                        <TextField style={{color:"white"}} id="standard-basic" label="Email or Username" value={user.name} onChange={changeEmail} />
-                        <TextField id="standard-password-input" label="Password" type="password" autoComplete="current-password" onChange={changePassword} value={user.password} />
+                        <TextField style={{color:"white"}} id="standard-basic" label="Email or Username" name="email" value={user.email} onChange={changeHandler} />
+                        <TextField id="standard-password-input" label="Password" type="password" name="password" autoComplete="current-password" onChange={changeHandler} value={user.password} />
                         <p className="loginPrivacyMessage">
                         By continuing, you agree to gymTube's
                         <span>Terms of Use</span>  and <span>Privacy Policy.</span> 

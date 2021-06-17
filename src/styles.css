@@ -1,3 +1,5 @@
+@import "../src/components/Header//header.css";
+@import "../src/components/MainPages/products.css";
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -134,75 +136,13 @@
  
 }
 
-.logoandsearch
-{
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:.5rem;
-  box-sizing: border-box;
-  background-color: #D1D5DB;
-  
-}
-.logoandsearch__left
-{
-  flex:0.2;
-}
 
-.user-wishlist-cart .MuiSvgIcon-root
-{
-  font-size: 2.2rem;
-  padding-right: .2rem;
-  color: black;
-  outline: none;
-
-}
-.search-bar
-{
-  flex:0.6;
-  
-}
-.search-box
-{
-  display: flex;
-  align-items: center;
-
-}
-#searchitems
-{
-  padding:.6rem 1rem;
-  width:100%;
-  font-size: 1rem;
-  border:.1rem solid #666;
-  outline: none;
-  margin:0 !important;
- 
-}
-.search-bar__label
-{
-
- font-size:2rem; 
- padding:3px 2px 2px;
- border-radius: 0 5px 5px 0;
- cursor:pointer;
- text-align: center;
- background-color: #666;
- color:white;
  
 
 
-}
 
-.user-wishlist-cart
-{
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  padding:0 .5rem;
-  margin-left: 12px;
-  flex:0.2;
-  
-}
+
+
 .sticky
 {
   position: -webkit-sticky;
@@ -268,16 +208,7 @@
 
 }
 
-.searchedText h1
 
-{
-  text-transform: capitalize;
-  text-align: center;
-  color:#666;
-  padding:5px;
-  text-decoration:underline  ;
-
-}
 
 .product
 {

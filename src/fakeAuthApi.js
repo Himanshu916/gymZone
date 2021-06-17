@@ -34,7 +34,7 @@ export const fakeauthapi = (userName,password)=>
             console.log(user)
             if(user?.password === password)
             {
-                resolve({success:true,status:200})
+                resolve({success:true,status:200,token:"himanshu"})
             }
             reject({sucess:false,status:400})
         },3000)
