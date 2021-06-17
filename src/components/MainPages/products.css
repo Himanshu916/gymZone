@@ -68,7 +68,7 @@
 
    
 }
-.productnew_button button
+.productnew_button button,.cartRemove,.wishListAdd
 {
     width:100%;
     height:40px;
@@ -81,6 +81,10 @@
     outline: none;
     letter-spacing: 2px;
     
+}
+.cartAndWishList
+{
+    display: flex;;
 }
 .buy
 {
@@ -174,6 +178,12 @@ justify-content: flex-start;
 .wishlist-button .remove
 {
     color:red;
+}
+
+.pricing 
+{
+    display: flex;
+    flex-direction: column;
 }
 @media screen and (max-width:650px) 
 {

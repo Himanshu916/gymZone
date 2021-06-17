@@ -7,7 +7,6 @@ let discountAmount;
 let totalMarked;
 export default function Cart() {
   const { itemsInCart,dispatch } = useContext(CartContext);
-  const itemsInCartt = [];
   const [total,setTotal] = useState(0);
 console.log(itemsInCart,"aditi")
 
@@ -32,17 +31,17 @@ if(!token)
     discountAmount =0;
     totalMarked=0;
    
-    itemsInCartt.forEach(item=>
+    itemsInCart?.forEach(item=>
       {
-        totalMarked += item.markedprice*item.quantity;
-        totalAmount +=  (item.markedprice -
-          (item.discount / 100) * item.markedprice) *
+        totalMarked += item.price*item.quantity;
+        totalAmount +=  (item.price -
+          (item.discount / 100) * item.price) *
         item.quantity;
-        discountAmount +=  ((item.discount / 100) * item.markedprice)*
+        discountAmount +=  ((item.discount / 100) * item.price)*
         item.quantity
       })
       setTotal(totalAmount)
-  },[])
+  },[itemsInCart])
 
   console.log(itemsInCart,"in cat")
   return (
@@ -59,10 +58,10 @@ if(!token)
                 {itemsInCart.map((item) => {
                   let flag = 0;
                 
-                  {/* const price =
-                    (item.markedprice -
-                      (item.discount / 100) * item.markedprice) *
-                    item.quantity; */}
+                  const priced =
+                    (item.price -
+                      (item.discount / 100) * item.price) *
+                    item.quantity;
 
                   if (item.quantity === 0) {
                     flag = 1;
@@ -71,8 +70,9 @@ if(!token)
                     <li key={item._id}>
                       <div className="shoppingBag">
                         <img src={item.images.url} alt="" />
-                        <button
-                          className="primary-btn"
+                        <div className="cartAndWishList">
+                        <button style={{color:"gray",fontWeight:700}}
+                          className="cartRemove"
                           onClick={() => {
                             console.log("clicked", item);
                             dispatch({ type: "RemoveFromCart", payload: item });
@@ -80,13 +80,18 @@ if(!token)
                         >
                           Remove
                         </button>
+                        <button style={{color:"red",fontWeight:700}} className="wishListAdd">
+                          Move To WishList
+                        </button>
+                        </div>
                        
                       </div>
                       <div className="shoppingBag--information">
                         <div>
-                          <h3>Brand X</h3>
+                          <h3>{item.title}</h3>
+                          <h4>Sold : {item.sold}</h4>
                           <div>
-                            {/* <p> {item.text}</p> */}
+                           
                             <p>Quantity : {item.quantity}</p>
                             <button
                               className="quantity-btn"
@@ -108,9 +113,13 @@ if(!token)
                             </button>
                           </div>
                         </div>
-
-                        <div> Rs.{item.price} </div>
-                        {/* <div> Rs.{price} {item.markedprice}</div> */}
+                        <div className="pricing">
+                        <div> Marked Price :Rs {item.price}</div>
+                        <h3>Price After Discount</h3>
+                        <div> Rs{(item.price -
+                      (item.discount / 100) * item.price)}*{item.quantity} = Rs.{priced} </div>
+                        </div>
+                   
                       </div>
                     </li>
                   );
@@ -120,9 +129,9 @@ if(!token)
           );
         })()}
         </div>
-        {/* {
+        {
 
-       itemsInCartt.length !== 0 ? 
+       itemsInCart.length !== 0 ? 
         <div className="cartPage__place">
             <div className="place__detail">
              <h2> PRICE DETAILS</h2>
@@ -160,7 +169,7 @@ if(!token)
           
         </div>
         :""
-        } */}
+        }
       </div>
     </>
   );
