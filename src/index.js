@@ -1,23 +1,31 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-
 import App from "./App";
-import { CategoryProvider } from "./contexts/category-context";
 import { CartProvider } from "./contexts/cart-context";
-import { makeServer } from "./api/server";
 import { FilterProvider } from "./contexts/filter-context";
+import {AuthProvider} from "./contexts/auth-context"
+import {BrowserRouter as Router} from "react-router-dom"
+import {DataProvider} from "./contexts/Global-State"
 
-makeServer();
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <CategoryProvider>
+    <DataProvider>
+    <AuthProvider>
       <CartProvider>
         <FilterProvider>
+        <Router>
+       
+       
           <App />
+        
+      
+        </Router>
         </FilterProvider>
       </CartProvider>
-    </CategoryProvider>
+      </AuthProvider>
+      </DataProvider>
   </StrictMode>,
   rootElement
 );

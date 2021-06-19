@@ -3,7 +3,7 @@ import { FilterContext } from "../contexts/filter-context";
 export default function PriceFilter() {
   const { dispatche } = useContext(FilterContext);
   return (
-    <>
+    <div className="filterDesign__left">
       <fieldset>
         <legend>Sort By</legend>
         <label htmlFor="sort_low_to_high">
@@ -29,6 +29,6 @@ export default function PriceFilter() {
           Price High To Low
         </label>
       </fieldset>
-    </>
+    </div>
   );
 }

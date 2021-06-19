@@ -1,28 +1,39 @@
 import "./styles.css";
 import "./mandik.css";
-import { useContext } from "react";
-import { categoryContext } from "./contexts/category-context";
-import Header from "./components/header";
-import Sports from "./components/sports";
-import Shoes from "./components/shoes";
-import GymEssentials from "./components/gym";
-import Supplements from "./components/supplements";
-import FoodAndDrinks from "./components/foodanddrink";
+import {Routes,Route} from "react-router-dom";
+
+import Header from "./components/Header/header";
+import Products from "./components/MainPages/Products"
 import Cart from "./components/cart";
 import WishList from "./components/wishlist";
+import Home from "./components/Home";
+import PrivateRoute from "./PrivateRoute";
+import Login from "./components/Auth/Login"
+import SignUp from "./components/Auth/SignUp"
+import NotFound from "./components/MainPages/NotFound"
+import Productnew from "./components/MainPages/Productnew"
+
+
+
 
 export default function App() {
-  const { router } = useContext(categoryContext);
+
   return (
     <div>
+  
       <Header />
-      {router === "sports" && <Sports />}
-      {router === "shoes" && <Shoes />}
-      {router === "gym" && <GymEssentials />}
-      {router === "supplements" && <Supplements />}
-      {router === "foodanddrink" && <FoodAndDrinks />}
-      {router === "cart" && <Cart />}
-      {router === "wishlist" && <WishList />}
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/products" element={<Products/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/cart" element={<Cart />} />
+        
+        <Route path="/productsnew/:id" element={<Productnew/>} />
+        <PrivateRoute path="/wishlist" element={<WishList />} />
+        <Route path="*" element={<NotFound/>}/>
+      </Routes>
+
     </div>
   );
 }
